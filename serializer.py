@@ -7,5 +7,5 @@ class ClassificationSerializer:
     def is_valid(self):
         if self.data:
             self.vector = self.data['vector']
-            return True
+            return self.vector != '' or self.vector != None
         return False
