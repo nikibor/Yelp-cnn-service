@@ -27,8 +27,9 @@ def cnn_classification_debug():
         serializer = ClassificationSerializer(data=data)
         if serializer.is_valid():
             vector = serializer.vector
+            hashkey = serializer.hashkey
             cnn_classes = CNN().classify(vector=vector).tolist()
-            result = {'cnn_classes': cnn_classes}
+            result = {'cnn_classes': cnn_classes, 'hashkey': hashkey}
             requests.post(url='yelp.main.com', json=result)
     return 'Error!'
 
