@@ -26,8 +26,8 @@ def cnn_classification_debug():
             "token": serializer.token
         }
         print(3)
-        # embeding_response = http_requests.post(url='https://yelp-vector-service.herokuapp.com/api/embedding', json=data)
-        embeding_response = http_requests.post(url='http://127.0.0.1:5002/api/embedding', json=data)
+        embeding_response = http_requests.post(url='https://yelp-vector-service.herokuapp.com/api/embedding', json=data)
+        # embeding_response = http_requests.post(url='http://127.0.0.1:5002/api/embedding', json=data)
         print(4)
         vector = embeding_response.json()['vector']
         print(5)
