@@ -7,7 +7,7 @@ class ClassificationSerializer:
 
     def is_valid(self):
         if self.data:
-            self.text = self.data['text']
-            self.token = self.data['token']
+            self.text = self.data[0]
+            self.token = self.data[1]
             return self.text != '' and self.token != ''
         return False

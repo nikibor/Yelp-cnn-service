@@ -16,18 +16,23 @@ def index():
 @app.route('/api/cnn', methods=['POST'])
 def cnn_classification_debug():
     if request.is_json:
-        data = request.get_json()
-        serializer = ClassificationSerializer(data=data)
+        content = request.get_json()
+        serializer = ClassificationSerializer(data=content)
         if not serializer.is_valid():
             return 'Error!'
-
+        print(2)
         data = {
             "text": serializer.text,
             "token": serializer.token
         }
-        embeding_response = http_requests.post(url='https://yelp-vector-service.herokuapp.com/api/embedding', json=data)
+        print(3)
+        # embeding_response = http_requests.post(url='https://yelp-vector-service.herokuapp.com/api/embedding', json=data)
+        embeding_response = http_requests.post(url='http://127.0.0.1:5002/api/embedding', json=data)
+        print(4)
         vector = embeding_response.json()['vector']
+        print(5)
         cnn_classes = CNN().classify(vector=vector).tolist()
+        print(6)
         result = {'cnn_classes': cnn_classes}
         return json.dumps(result)
 
@@ -47,4 +52,4 @@ def cnn_classification_debug():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port=5001)
